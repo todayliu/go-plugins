@@ -274,7 +274,7 @@ func (n *nsqBroker) Subscribe(topic string, handler broker.Handler, opts ...brok
 			return err
 		}
 
-		p := &publication{topic: topic, m: &m}
+		p := &publication{topic: topic, m: &m, nm: nm}
 		p.err = handler(p)
 		return p.err
 	})
@@ -322,6 +322,10 @@ func (p *publication) Ack() error {
 
 func (p *publication) Error() error {
 	return p.err
+}
+
+func (p *publication) BrokerMessage() error {
+	return p.nm
 }
 
 func (s *subscriber) Options() broker.SubscribeOptions {
