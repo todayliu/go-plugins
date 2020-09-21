@@ -324,7 +324,7 @@ func (p *publication) Error() error {
 	return p.err
 }
 
-func (p *publication) BrokerMessage() error {
+func (p *publication) BrokerMessage() interface{} {
 	return p.nm
 }
 
